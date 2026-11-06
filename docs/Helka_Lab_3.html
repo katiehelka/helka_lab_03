@@ -1,0 +1,2943 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Katelyn Helka">
+<meta name="dcterms.date" content="2026-11-06">
+
+<title>Helka_Lab_3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-991b1886d3c685c7aa2b62b80640c7af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Helka_Lab_3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Katelyn Helka </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 6, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="information-about-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="information-about-the-dataset">Information about the Dataset</h2>
+<p>The dataset contains department-level summaries of employee responses regarding the overall workplace rating (rating), handling of employee complaints (complaints), opportunity to learn (learning) and pay increases (raises).</p>
+<p>I use complete cases for all variables so that the candidate models are estimated using the same observations.</p>
+<p>The final analysis includes <strong>30 rating</strong>.</p>
+<section id="research-question" class="level3">
+<h3 class="anchored" data-anchor-id="research-question">Research Question</h3>
+<p>How are complaints, learning opportunities, and raises associated with overall workplace rating on a departmental level?</p>
+</section>
+<section id="predictions" class="level3">
+<h3 class="anchored" data-anchor-id="predictions">Predictions</h3>
+<p>I expect:</p>
+<ul>
+<li>Departments who handle employee complaints better and have higher complaint scores will have higher ratings.</li>
+<li>Departments with more learning opportunities will have higher ratings.</li>
+<li>Departments with higher raises will have higher ratings.</li>
+</ul>
+<p>These are predictions about associations, not causal effects.</p>
+</section>
+</section>
+<section id="exploring-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-data">1. Exploring the data</h2>
+<section id="descriptive-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="descriptive-statistics">Descriptive statistics</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tgxhlessax" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tgxhlessax table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tgxhlessax thead, #tgxhlessax tbody, #tgxhlessax tfoot, #tgxhlessax tr, #tgxhlessax td, #tgxhlessax th {
+  border-style: none;
+}
+
+#tgxhlessax p {
+  margin: 0;
+  padding: 0;
+}
+
+#tgxhlessax .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tgxhlessax .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tgxhlessax .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tgxhlessax .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tgxhlessax .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tgxhlessax .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tgxhlessax .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tgxhlessax .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tgxhlessax .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tgxhlessax .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tgxhlessax .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tgxhlessax .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tgxhlessax .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tgxhlessax .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tgxhlessax .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tgxhlessax .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tgxhlessax .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tgxhlessax .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tgxhlessax .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tgxhlessax .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tgxhlessax .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tgxhlessax .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tgxhlessax .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tgxhlessax .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tgxhlessax .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tgxhlessax .gt_left {
+  text-align: left;
+}
+
+#tgxhlessax .gt_center {
+  text-align: center;
+}
+
+#tgxhlessax .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tgxhlessax .gt_font_normal {
+  font-weight: normal;
+}
+
+#tgxhlessax .gt_font_bold {
+  font-weight: bold;
+}
+
+#tgxhlessax .gt_font_italic {
+  font-style: italic;
+}
+
+#tgxhlessax .gt_super {
+  font-size: 65%;
+}
+
+#tgxhlessax .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tgxhlessax .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tgxhlessax .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tgxhlessax .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tgxhlessax .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tgxhlessax .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tgxhlessax .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tgxhlessax .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tgxhlessax div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="variable" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">variable</th>
+<th id="mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">mean</th>
+<th id="sd" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">sd</th>
+<th id="min" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">min</th>
+<th id="max" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">max</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable">complaints</td>
+<td class="gt_row gt_right" headers="mean">66.60</td>
+<td class="gt_row gt_right" headers="sd">13.31</td>
+<td class="gt_row gt_right" headers="min">37.00</td>
+<td class="gt_row gt_right" headers="max">90.00</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="variable">learning</td>
+<td class="gt_row gt_right" headers="mean">56.37</td>
+<td class="gt_row gt_right" headers="sd">11.74</td>
+<td class="gt_row gt_right" headers="min">34.00</td>
+<td class="gt_row gt_right" headers="max">75.00</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="variable">raises</td>
+<td class="gt_row gt_right" headers="mean">64.63</td>
+<td class="gt_row gt_right" headers="sd">10.40</td>
+<td class="gt_row gt_right" headers="min">43.00</td>
+<td class="gt_row gt_right" headers="max">88.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="distribution-of-ratings" class="level3">
+<h3 class="anchored" data-anchor-id="distribution-of-ratings">Distribution of Ratings</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/outcome-distribution-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Distribution of Department Ratings</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="relationships-between-predictors-and-rating" class="level3">
+<h3 class="anchored" data-anchor-id="relationships-between-predictors-and-rating">Relationships between predictors and Rating</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/complaints-scatterplot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Relationship between complaint score and department rating</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These exploratory plots provide support for the three predictions made above. There appears to be a linear relationship between all three predictors and overall department rating. It appears that the strongest relationship is between the handling of complaints and department score, as the error (shaded area on the graph) is the thinnest. Further, there are a few unusual (potentially outlier) observations, mostly in the scatterplot between learning opportunities and department ratings. More of the points on the scatterplot are further from the line of best fit for both higher and lower overall ratings.</p>
+</section>
+</section>
+<section id="specify-and-estimate-competing-models" class="level2">
+<h2 class="anchored" data-anchor-id="specify-and-estimate-competing-models">2. Specify and estimate competing models</h2>
+<section id="explaining-my-predictions" class="level3">
+<h3 class="anchored" data-anchor-id="explaining-my-predictions">2.1 Explaining my Predictions</h3>
+<p>As a reminder, here were my predictions:</p>
+<ul>
+<li>Departments who handle employee complaints better and have higher complaint scores will have higher ratings.</li>
+<li>Departments with more learning opportunities will have higher ratings.</li>
+<li>Departments with higher raises will have higher ratings.</li>
+</ul>
+<p>I made my first prediction because if employees feel their department is listening to them by acting on and handling any complaints that are brought up, they will have more positive feelings towards their department. These positive feelings will present themselves as a higher overall rating.</p>
+<p>I made my second prediction because additional learning opportunities are often a way for someone to develop their skills and move further in an organization. Learning opportunities can also break-up the monotony of a job. These outcomes of learning opportunities can also result in more positive feelings towards the department and higher overall ratings.</p>
+<p>Finally, I made my third prediction because when a department provides an employee with a pay raise, it is a clear indicator to that employee that their work and what they have done for the department is valued, not to mention with the cost of living, people value earning more money for the work they complete. Feelings of being valuable can also result in higher overall ratings.</p>
+</section>
+<section id="specifying-competing-nested-models" class="level3">
+<h3 class="anchored" data-anchor-id="specifying-competing-nested-models">2.2 Specifying Competing Nested Models</h3>
+</section>
+<section id="inspecting-the-models" class="level3">
+<h3 class="anchored" data-anchor-id="inspecting-the-models">Inspecting the models</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = rating ~ 1, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-24.6333  -5.8833   0.8667   7.1167  20.3667 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   64.633      2.222   29.08   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 12.17 on 29 degrees of freedom</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = rating ~ complaints, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-12.8799  -5.9905   0.1783   6.2978   9.6294 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 14.37632    6.61999   2.172   0.0385 *  
+complaints   0.75461    0.09753   7.737 1.99e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.993 on 28 degrees of freedom
+Multiple R-squared:  0.6813,    Adjusted R-squared:  0.6699 
+F-statistic: 59.86 on 1 and 28 DF,  p-value: 1.988e-08</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = rating ~ complaints + learning, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.5568  -5.7331   0.6701   6.5341  10.3610 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   9.8709     7.0612   1.398    0.174    
+complaints    0.6435     0.1185   5.432 9.57e-06 ***
+learning      0.2112     0.1344   1.571    0.128    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.817 on 27 degrees of freedom
+Multiple R-squared:  0.708, Adjusted R-squared:  0.6864 
+F-statistic: 32.74 on 2 and 27 DF,  p-value: 6.058e-08</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = rating ~ complaints + learning + raises, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.6282  -5.8107   0.5115   6.3946  10.3509 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 10.52260    8.30481   1.267    0.216    
+complaints   0.65349    0.13637   4.792 5.82e-05 ***
+learning     0.22069    0.14967   1.475    0.152    
+raises      -0.02864    0.18245  -0.157    0.876    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.943 on 26 degrees of freedom
+Multiple R-squared:  0.7083,    Adjusted R-squared:  0.6746 
+F-statistic: 21.04 on 3 and 26 DF,  p-value: 3.957e-07</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  2.5 %     97.5 %
+(Intercept) -6.54817583 27.5933815
+complaints   0.37316545  0.9338110
+learning    -0.08695739  0.5283289
+raises      -0.40366218  0.3463882</code></pre>
+</div>
+</div>
+<p>The complaints coefficient decreases between M1 and M2, which is most likely because learning opportunities was added into the model and explained part of the positive correlation. Between M2 and M3, the complaints coefficient increased by 0.01, showing that raises slightly decreased the outcome variable of ratings which is compensated by the small increase in complaints.</p>
+</section>
+</section>
+<section id="compare-models-performance" class="level2">
+<h2 class="anchored" data-anchor-id="compare-models-performance">3. Compare Models’ Performance</h2>
+<section id="conduct-nested-model-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="conduct-nested-model-comparisons">3.1. Conduct nested-model comparisons</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: rating ~ 1
+Model 2: rating ~ complaints
+Model 3: rating ~ complaints + learning
+Model 4: rating ~ complaints + learning + raises
+  Res.Df    RSS Df Sum of Sq       F    Pr(&gt;F)    
+1     29 4297.0                                   
+2     28 1369.4  1   2927.58 60.7256 2.884e-08 ***
+3     27 1254.6  1    114.73  2.3799    0.1350    
+4     26 1253.5  1      1.19  0.0246    0.8765    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>These ANOvA results demonstrate that adding complaints into the model explains significantly more variation (F(1, 28) = 60.73, p &lt; 0.001) than the intercept model. However, adding learning opportunities does not significantly improve model fit (F(1, 27) = 2.38, p = 0.135), nor does adding raises (F(1, 26) = 0.02, p = 0.877).</p>
+</section>
+<section id="extract-model-level-performance" class="level3">
+<h3 class="anchored" data-anchor-id="extract-model-level-performance">3.2. Extract model-level performance</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 13
+  r.squared adj.r.squared sigma statistic       p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0             0     12.2       NA   NA               NA -117.   238.  241.
+2     0.681         0.670  6.99      59.9  0.0000000199     1  -99.9  206.  210.
+3     0.708         0.686  6.82      32.7  0.0000000606     2  -98.6  205.  211.
+4     0.708         0.675  6.94      21.0  0.000000396      3  -98.6  207.  214.
+# ℹ 4 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;,
+#   Model &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  Model          r.squared adj.r.squared  RMSE
+  &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;
+1 M0: Null           0             0     12.0 
+2 M1: Complaints     0.681         0.670  6.76
+3 M2: + Learning     0.708         0.686  6.47
+4 M3: + Raises       0.708         0.675  6.46</code></pre>
+</div>
+</div>
+</section>
+<section id="combine-nested-tests-and-model-performance" class="level3">
+<h3 class="anchored" data-anchor-id="combine-nested-tests-and-model-performance">3.3. Combine nested tests and model performance</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>           Model r.squared     Delta.R2 adj.r.squared      RMSE Residual.df
+1       M0: Null 0.0000000           NA     0.0000000 11.967967          29
+2 M1: Complaints 0.6813142 0.6813141641     0.6699325  6.756188          28
+3 M2: + Learning 0.7080152 0.0267010317     0.6863867  6.466965          27
+4   M3: + Raises 0.7082916 0.0002764121     0.6746329  6.463903          26
+  Nested.Df Nested.F.stat Nested.p.value
+1        NA            NA             NA
+2         1   60.72560389   2.883919e-08
+3         1    2.37986580   1.349930e-01
+4         1    0.02463664   8.764884e-01</code></pre>
+</div>
+</div>
+</section>
+<section id="display-the-combined-model-comparison-table" class="level3">
+<h3 class="anchored" data-anchor-id="display-the-combined-model-comparison-table">3.4. Display the combined model-comparison table</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="felvgsxagk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#felvgsxagk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#felvgsxagk thead, #felvgsxagk tbody, #felvgsxagk tfoot, #felvgsxagk tr, #felvgsxagk td, #felvgsxagk th {
+  border-style: none;
+}
+
+#felvgsxagk p {
+  margin: 0;
+  padding: 0;
+}
+
+#felvgsxagk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#felvgsxagk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#felvgsxagk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#felvgsxagk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#felvgsxagk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#felvgsxagk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#felvgsxagk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#felvgsxagk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#felvgsxagk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#felvgsxagk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#felvgsxagk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#felvgsxagk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#felvgsxagk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#felvgsxagk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#felvgsxagk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#felvgsxagk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#felvgsxagk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#felvgsxagk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#felvgsxagk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#felvgsxagk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#felvgsxagk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#felvgsxagk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#felvgsxagk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#felvgsxagk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#felvgsxagk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#felvgsxagk .gt_left {
+  text-align: left;
+}
+
+#felvgsxagk .gt_center {
+  text-align: center;
+}
+
+#felvgsxagk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#felvgsxagk .gt_font_normal {
+  font-weight: normal;
+}
+
+#felvgsxagk .gt_font_bold {
+  font-weight: bold;
+}
+
+#felvgsxagk .gt_font_italic {
+  font-style: italic;
+}
+
+#felvgsxagk .gt_super {
+  font-size: 65%;
+}
+
+#felvgsxagk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#felvgsxagk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#felvgsxagk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#felvgsxagk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#felvgsxagk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#felvgsxagk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#felvgsxagk .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#felvgsxagk .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#felvgsxagk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Model" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model</th>
+<th id="r.squared" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">R²</th>
+<th id="Delta.R2" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ΔR²</th>
+<th id="adj.r.squared" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Adjusted R²</th>
+<th id="RMSE" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">RMSE</th>
+<th id="Residual.df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Residual df</th>
+<th id="Nested.Df" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Nested df</th>
+<th id="Nested.F.stat" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Nested F</th>
+<th id="Nested.p.value" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Nested p</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">M0: Null</td>
+<td class="gt_row gt_right" headers="r.squared">0.000</td>
+<td class="gt_row gt_right" headers="Delta.R2">—</td>
+<td class="gt_row gt_right" headers="adj.r.squared">0.000</td>
+<td class="gt_row gt_right" headers="RMSE">11.968</td>
+<td class="gt_row gt_right" headers="Residual.df">29</td>
+<td class="gt_row gt_right" headers="Nested.Df">—</td>
+<td class="gt_row gt_right" headers="Nested.F.stat">—</td>
+<td class="gt_row gt_right" headers="Nested.p.value">—</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Model">M1: Complaints</td>
+<td class="gt_row gt_right" headers="r.squared">0.681</td>
+<td class="gt_row gt_right" headers="Delta.R2">0.681</td>
+<td class="gt_row gt_right" headers="adj.r.squared">0.670</td>
+<td class="gt_row gt_right" headers="RMSE">6.756</td>
+<td class="gt_row gt_right" headers="Residual.df">28</td>
+<td class="gt_row gt_right" headers="Nested.Df">1</td>
+<td class="gt_row gt_right" headers="Nested.F.stat">60.726</td>
+<td class="gt_row gt_right" headers="Nested.p.value">&lt; .001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">M2: + Learning</td>
+<td class="gt_row gt_right" headers="r.squared">0.708</td>
+<td class="gt_row gt_right" headers="Delta.R2">0.027</td>
+<td class="gt_row gt_right" headers="adj.r.squared">0.686</td>
+<td class="gt_row gt_right" headers="RMSE">6.467</td>
+<td class="gt_row gt_right" headers="Residual.df">27</td>
+<td class="gt_row gt_right" headers="Nested.Df">1</td>
+<td class="gt_row gt_right" headers="Nested.F.stat">2.380</td>
+<td class="gt_row gt_right" headers="Nested.p.value">0.135</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Model">M3: + Raises</td>
+<td class="gt_row gt_right" headers="r.squared">0.708</td>
+<td class="gt_row gt_right" headers="Delta.R2">0.000</td>
+<td class="gt_row gt_right" headers="adj.r.squared">0.675</td>
+<td class="gt_row gt_right" headers="RMSE">6.464</td>
+<td class="gt_row gt_right" headers="Residual.df">26</td>
+<td class="gt_row gt_right" headers="Nested.Df">1</td>
+<td class="gt_row gt_right" headers="Nested.F.stat">0.025</td>
+<td class="gt_row gt_right" headers="Nested.p.value">0.876</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="interpreting-the-combined-table" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-the-combined-table">3.5 Interpreting the combined table</h3>
+<p>The model that explains the largest proportion of variation in rating is M3. However, this is to be expected since explained variance will always increase as more predictors are added, and this is seen across all four models with each R² increasing from the previous model.</p>
+<p>When we compare the adjusted R² values, we can see that our adjusted R² actually decreases from M2 to M3. This shows that the addition of raises to the model did not meaningfully improve the model since the adjusted R² also accounts for the number of predictors included in the model. The adjusted R² did improve slightly from 0.670 for M1 to 0.686 for M2. Therefore, the additional variation explained by M2 from M1 is not only due to the increased number of predictors, even if the increase in R² is small.</p>
+<p>However, with that said, the only improvement in model fit was M1 with a p-value of less than 0.001. The other two models were not statistically significant, with p-values greater than 0.05. Additionally, we see a similar pattern emerge when looking at the RMSE values. M1 substantially reduced RMSE by approximately 43.5%, suggesting a meaningful improvement in the model’s prediction accuracy. On the other hand, M2 only reduced RMSE by 4.3% and M3 resulted in an almost negligible decrease of 0.05%.</p>
+<p>Although adding the additional predictors did increase R² and the adjusted R² (with the exception of M3), while decreasing RMSE, the improvements continuously became smaller, suggesting that complaints provided the largest improvement in overall workplace ratings. This result is then supported with M1 having the only statistically significant change in model fit of the three nested models.</p>
+</section>
+</section>
+<section id="evaluate-regression-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="evaluate-regression-diagnostics">4. Evaluate Regression Diagnostics</h2>
+<p>The most promising model would be either M1 or M2, but I would choose M2. Although M1 is the only model that improved at a statistically significant level, M2 had the highest adjusted R², showing it had the best model fit when also accounting for complexity. Furthermore, M2 had the lowest RMSE, which decreased from M1 by 4.3% indicating the best prediction accuracy out of the four models.</p>
+<p>In summary, the provisionally selected model is <strong>M2: + Learning</strong>.</p>
+<p>Its performance is:</p>
+<ul>
+<li>R² = <strong>0.708</strong></li>
+<li>Adjusted R² = <strong>0.686</strong></li>
+<li>RMSE = <strong>6.47</strong> prestige points.</li>
+</ul>
+<section id="examine-the-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="examine-the-assumptions">4.1 Examine the Assumptions</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># Comparison of Model Performance Indices
+
+Name | Model |    R2 | R2 (adj.) |   RMSE |  Sigma | AIC weights | AICc weights
+-------------------------------------------------------------------------------
+mod2 |    lm | 0.708 |     0.686 |  6.467 |  6.817 |       0.475 |        0.442
+mod1 |    lm | 0.681 |     0.670 |  6.756 |  6.993 |       0.348 |        0.453
+mod3 |    lm | 0.708 |     0.675 |  6.464 |  6.943 |       0.177 |        0.105
+mod0 |    lm | 0.000 |     0.000 | 11.968 | 12.173 |    3.36e-08 |     5.56e-08
+
+Name | BIC weights | Performance-Score
+--------------------------------------
+mod2 |       0.376 |            95.03%
+mod1 |       0.554 |            94.05%
+mod3 |       0.070 |            67.00%
+mod0 |    1.08e-07 |             0.00%</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>According to the performance comparison table, M2 is considered the best model.</p>
+<section id="standard-diagnostic-plots" class="level4">
+<h4 class="anchored" data-anchor-id="standard-diagnostic-plots">Standard diagnostic plots</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/diagnostics for mod2-1.png" class="img-fluid figure-img" width="864"></p>
+<figcaption>Regression diagnostic plots for the provisionally selected model, mod2</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="reporting-the-diagnostic-finding" class="level3">
+<h3 class="anchored" data-anchor-id="reporting-the-diagnostic-finding">4.2 Reporting the Diagnostic Finding</h3>
+<p><strong>Residuals versus fitted values</strong></p>
+<p>The residuals are generally scattered around zero and the line is relatively flat which is a good indicator of the model being linear. However, there is a slight curve around the fitted values between 65-70. It is not incredibly pronounced and so overall it appears this model satisfies the assumption of linearity with some minor deviations.</p>
+<p><strong>Normal Q–Q plot</strong></p>
+<p>Most of the points follow the diagonal reference line with some deviation at the tails. Therefore, the residuals appear approximately normally distributed as the deviations are not severe.</p>
+<p><strong>Scale–location plot</strong></p>
+<p>This plot is the largest reason for concern as the diagnostic line is not horizontal. This shows that the spread of the residuals appear to vary across the fitted values which suggests there could be potential heteroscedasticity.</p>
+<p><strong>Residuals versus leverage</strong></p>
+<p>Observation 24 has higher leverage than the other observations and could have be influencing the fitted model. This observation could be investigated further.</p>
+<section id="additional-diagnostics" class="level4">
+<h4 class="anchored" data-anchor-id="additional-diagnostics">Additional diagnostics</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/model diagnostics for mod2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Multicollinearity</strong></p>
+<p>There appears to be no multicollinearity as both predictors have low VIF and adjusted VIF values and a high enough tolerance.</p>
+<p><strong>Check Model Results</strong></p>
+<p>These plots further show what I stated above with the largest concern being that the assumption of homoscedasticity</p>
+</section>
+<section id="ploting-m1-to-compare" class="level4">
+<h4 class="anchored" data-anchor-id="ploting-m1-to-compare">Ploting M1 to compare</h4>
+</section>
+<section id="additional-diagnostics-1" class="level4">
+<h4 class="anchored" data-anchor-id="additional-diagnostics-1">Additional diagnostics</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/diagnostics for mod1-1.png" class="img-fluid figure-img" width="864"></p>
+<figcaption>Regression diagnostic plots for mod1</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>$PP_CHECK</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$NCV</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$HOMOGENEITY</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$OUTLIERS</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/unnamed-chunk-14-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+$QQ</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Helka_Lab_3_files/figure-html/unnamed-chunk-14-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="reporting-my-selected-model" class="level2">
+<h2 class="anchored" data-anchor-id="reporting-my-selected-model">5. Reporting my Selected Model</h2>
+<section id="selecting-a-model" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-a-model">5.1. Selecting a Model</h3>
+<p>Based on the comparisons, I would select M1 as the most defensible model. Although M2 has a higher R² and adjusted R², it only explains an additional 2.67% of variation and does not produce a statistically significant improvement in model fit (p = .135). Additionally, while M2 has a slightly lower RMSE than M1, the reduction is relatively small (approximately 4.3%). M3 provides even less improvement, with almost no additional variation explained and a slightly lower adjusted R² than M2. Furthermore, and the main reason M1 is more defensible, the diagnostic plots for M1 show a less pronounced issue with homoscedasticity compared to M2. Although, the assumption is not perfectly satisfied in either model, M1 has more consistent variance within the residuals. Overall, M1 provides a relatively strong and simpler explanation of workplace ratings without the additional complexity of predictors that do not significantly improve model fit.</p>
+</section>
+<section id="create-a-regression-coefficient-table" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-regression-coefficient-table">5.2. Create a regression coefficient table</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="cfvzariyyw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cfvzariyyw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cfvzariyyw thead, #cfvzariyyw tbody, #cfvzariyyw tfoot, #cfvzariyyw tr, #cfvzariyyw td, #cfvzariyyw th {
+  border-style: none;
+}
+
+#cfvzariyyw p {
+  margin: 0;
+  padding: 0;
+}
+
+#cfvzariyyw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cfvzariyyw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cfvzariyyw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cfvzariyyw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cfvzariyyw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cfvzariyyw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cfvzariyyw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cfvzariyyw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cfvzariyyw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cfvzariyyw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cfvzariyyw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cfvzariyyw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cfvzariyyw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cfvzariyyw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cfvzariyyw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfvzariyyw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cfvzariyyw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cfvzariyyw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cfvzariyyw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfvzariyyw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cfvzariyyw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfvzariyyw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cfvzariyyw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfvzariyyw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cfvzariyyw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfvzariyyw .gt_left {
+  text-align: left;
+}
+
+#cfvzariyyw .gt_center {
+  text-align: center;
+}
+
+#cfvzariyyw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cfvzariyyw .gt_font_normal {
+  font-weight: normal;
+}
+
+#cfvzariyyw .gt_font_bold {
+  font-weight: bold;
+}
+
+#cfvzariyyw .gt_font_italic {
+  font-style: italic;
+}
+
+#cfvzariyyw .gt_super {
+  font-size: 65%;
+}
+
+#cfvzariyyw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cfvzariyyw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cfvzariyyw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cfvzariyyw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cfvzariyyw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cfvzariyyw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cfvzariyyw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#cfvzariyyw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#cfvzariyyw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="term" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Predictor</th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Estimate</th>
+<th id="std.error" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">SE</th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">95% CI lower</th>
+<th id="conf.high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">95% CI upper</th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">p</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="term">(Intercept)</td>
+<td class="gt_row gt_right" headers="estimate">14.376</td>
+<td class="gt_row gt_right" headers="std.error">6.620</td>
+<td class="gt_row gt_right" headers="conf.low">0.816</td>
+<td class="gt_row gt_right" headers="conf.high">27.937</td>
+<td class="gt_row gt_right" headers="p.value">0.039</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="term">complaints</td>
+<td class="gt_row gt_right" headers="estimate">0.755</td>
+<td class="gt_row gt_right" headers="std.error">0.098</td>
+<td class="gt_row gt_right" headers="conf.low">0.555</td>
+<td class="gt_row gt_right" headers="conf.high">0.954</td>
+<td class="gt_row gt_right" headers="p.value">&lt; .001</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="interpretting-the-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="interpretting-the-coefficients">5.3. Interpretting the Coefficients</h3>
+<p>The intercept coefficient indicates that when a department’s score for handling complaints is zero, its predicted overall workplace rating is <strong>14.376</strong>. The coefficient for complaints is positive, indicating that higher scores for how a department handles complaints are associated with higher overall workplace ratings. Specifically, for every one-unit increase in a department’s complaints score, its predicted overall workplace rating increases by <strong>0.755</strong> points. Because this model includes only one explanatory variable, there are no other predictors being held constant.</p>
+<p>The 95% confidence interval for the intercept ranges from <strong>0.816</strong> to <strong>27.937</strong>. This interval is relatively wide, suggesting greater uncertainty around the estimated intercept. However, because the interval does not include zero, the intercept is statistically significant at the 0.05 level, reflected by the p_value of <strong>0.039</strong>. In comparison, the 95% confidence interval for complaints ranges from <strong>0.555</strong> to <strong>0.954</strong>. This narrower interval suggests less uncertainty around the estimated association. It also does not include zero, indicating a statistically significant positive association between complaints scores and overall workplace ratings as demonstrated by the p-value of *0**.</p>
+</section>
+<section id="report-overall-model-performance" class="level3">
+<h3 class="anchored" data-anchor-id="report-overall-model-performance">5.4 Report overall model performance</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="teosqmnkeo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#teosqmnkeo table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#teosqmnkeo thead, #teosqmnkeo tbody, #teosqmnkeo tfoot, #teosqmnkeo tr, #teosqmnkeo td, #teosqmnkeo th {
+  border-style: none;
+}
+
+#teosqmnkeo p {
+  margin: 0;
+  padding: 0;
+}
+
+#teosqmnkeo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#teosqmnkeo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#teosqmnkeo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#teosqmnkeo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#teosqmnkeo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#teosqmnkeo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#teosqmnkeo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#teosqmnkeo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#teosqmnkeo .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#teosqmnkeo .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#teosqmnkeo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#teosqmnkeo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#teosqmnkeo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#teosqmnkeo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#teosqmnkeo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#teosqmnkeo .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#teosqmnkeo .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#teosqmnkeo .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#teosqmnkeo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#teosqmnkeo .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#teosqmnkeo .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#teosqmnkeo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#teosqmnkeo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#teosqmnkeo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#teosqmnkeo .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#teosqmnkeo .gt_left {
+  text-align: left;
+}
+
+#teosqmnkeo .gt_center {
+  text-align: center;
+}
+
+#teosqmnkeo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#teosqmnkeo .gt_font_normal {
+  font-weight: normal;
+}
+
+#teosqmnkeo .gt_font_bold {
+  font-weight: bold;
+}
+
+#teosqmnkeo .gt_font_italic {
+  font-style: italic;
+}
+
+#teosqmnkeo .gt_super {
+  font-size: 65%;
+}
+
+#teosqmnkeo .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#teosqmnkeo .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#teosqmnkeo .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#teosqmnkeo .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#teosqmnkeo .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#teosqmnkeo .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#teosqmnkeo .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#teosqmnkeo .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#teosqmnkeo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Name" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model</th>
+<th id="R2" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">R²</th>
+<th id="R2_adjusted" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Adjusted R²</th>
+<th id="RMSE" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">RMSE</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Name">mod1</td>
+<td class="gt_row gt_right" headers="R2">0.681</td>
+<td class="gt_row gt_right" headers="R2_adjusted">0.670</td>
+<td class="gt_row gt_right" headers="RMSE">6.756</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="overall-model-performance" class="level3">
+<h3 class="anchored" data-anchor-id="overall-model-performance">Overall model performance</h3>
+<p>The selected model, mod1, explains approximately <strong>68.1%</strong> of the variation in overall workplace rating within this sample.</p>
+<p>Its adjusted R² is <strong>0.67</strong>, and its in-sample RMSE is <strong>6.76 prestige points</strong>.</p>
+<p>The RMSE describes the typical magnitude of the model’s fitted residuals on a root-mean-square scale.</p>
+<p>It should not be interpreted as an estimate of out-of-sample predictive accuracy.</p>
+</section>
+</section>
+<section id="findings-and-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="findings-and-limitations">6. Findings and Limitations</h2>
+<p>This analysis illustrates how overall workplace rating can be investigated using several competing regression models.</p>
+<p>The final model provides estimates of the conditional associations between how a department handles complaints and the overall department rating.The final model did not include learning opportunities or pay raises, which was not expected when I made my predictions.</p>
+<p>However, several limitations should be recognized:</p>
+<ul>
+<li>The observations describe departments rather than individual people.</li>
+<li>Regression coefficients represent correlations rather than causal effects.</li>
+<li>Model diagnostics may reveal limitations not captured by summary fit statistics.</li>
+<li>In-sample model performance does not establish out-of-sample predictive accuracy.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

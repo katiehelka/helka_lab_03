@@ -1,0 +1,9 @@
+
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Helka_Lab_3"
+
+editor: visual
